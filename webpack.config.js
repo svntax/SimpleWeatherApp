@@ -3,6 +3,8 @@ const path = require("path");
 const DIR_SRC = path.join(__dirname, "src");
 const DIR_DIST = path.join(__dirname, "dist");
 
+const Dotenv = require("dotenv-webpack");
+
 const webpackConfig = {
 	entry: path.join(DIR_SRC, "index.js"),
 	output: {
@@ -14,7 +16,10 @@ const webpackConfig = {
 	},
 	devServer: {
 		contentBase: DIR_DIST
-	}
+	},
+	plugins: [
+		new Dotenv()
+	]
 };
 
 const babelConfig = {
