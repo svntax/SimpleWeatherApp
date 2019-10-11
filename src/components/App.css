@@ -1,4 +1,30 @@
+body {
+	background-image: linear-gradient(to bottom right, #356fe1, #c4f5ff);
+	font-family: Helvetica;
+}
+
 h1 {
+	text-align: center;
+	color: #f8f8f8;
+}
+
+.app-header {
+	background-color: #000d3c96;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 30px;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.form-section {
+	text-align: center;
+}
+
+.location-header {
+	margin-top: 15px;
+	font-size: 36px;
+	color: #f8f8f8;
+	font-weight: bold;
 	text-align: center;
 }
 

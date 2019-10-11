@@ -1,9 +1,35 @@
 .day-container {
-	background-color: #1d42a5;
+	background-color: #001d888a;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
 	color: #f8f8f8;
+	font-weight: bold;
+	font-size: 36px;
 	text-align: center;
 	padding: 30px;
 	margin: 15px;
 	width: 120px;
-	border-radius: 10px;
+}
+
+.day-container__day {
+	font-size: 36px;
+}
+
+.day-container__description {
+	font-size: 24px;
+	font-weight: normal;
+	height: 60px;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 15px;
+}
+
+.weather-icon {
+	width: 120px;
+	height: 120px;
+	display: flex;
+	justify-content: center;
+}
+
+.weather-icon img {
+	align-self: center;
 }

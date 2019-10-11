@@ -3,8 +3,14 @@ import "./DayCard.css";
 
 const DayCard = props => (
 	<div className="day-container">
-		<h2>{props.day}</h2>
-		<span>{props.temperature} F</span>
+		<div><span className="day-container__day">{props.day}</span></div>
+		<div className="weather-icon">
+			<img src={"http://openweathermap.org/img/wn/" + props.weatherIcon + "@2x.png"} />
+		</div>
+		<div className="day-container__description">
+			<span>{props.description}</span>
+		</div>
+		<span>{props.temperature}°F</span>
 	</div>
 );
 

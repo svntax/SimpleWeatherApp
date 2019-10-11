@@ -14,7 +14,7 @@ class App extends React.Component {
 		const daysForecast = [];
 		for(let i = 0; i < 5; i++){ //5-day forecast
 			daysForecast.push({
-				day: "Some Day",
+				day: "N/A",
 				temperature: 0
 			});
 		}
@@ -80,8 +80,8 @@ class App extends React.Component {
 					const localDate = new Date(utcDate.getTime() + (timezoneShift * 1000));
 					const localHour = localDate.getHours();
 					const dayOfWeek = localDate.getDay();
-					//If we're on a new day/the next day, update 
-					if(currentDay !== dayOfWeek){
+					//If we're on a new day/the next day, update, but limited to 5 days only
+					if(currentDay !== dayOfWeek && currentDayIndex < 4){
 						console.log("New day: " + dayOfWeek);
 						currentDayTempSet = false; //It's a new day, so we need to find the temp again
 						currentDay = dayOfWeek;
@@ -92,8 +92,12 @@ class App extends React.Component {
 						if(11 <= localHour && localHour < 14){
 							//Hard-coded to make the day temperature based on forecast between 11am and 2pm
 							currentDayTempSet = true;
-							daysForecast[currentDayIndex].temperature = kelvinToFarenheit(forecastData.main.temp).toFixed(2);
+							daysForecast[currentDayIndex].temperature = kelvinToFarenheit(forecastData.main.temp).toFixed(1);
 							console.log("Temp for " + getDayOfWeek(dayOfWeek) + " is " + forecastData.main.temp);
+							daysForecast[currentDayIndex].weatherIcon = forecastData.weather[0].icon;
+							const desc = forecastData.weather[0].description;
+							daysForecast[currentDayIndex].description = desc[0].toUpperCase() + desc.slice(1);
+							console.log(forecastData.weather[0]);
 						}
 					}
 				}
@@ -108,7 +112,9 @@ class App extends React.Component {
 				console.log(daysForecast);
 				localStorage.setItem("forecast", JSON.stringify(daysForecast));
 				this.setState({
-					days: daysForecast
+					days: daysForecast,
+					city: data.city.name,
+					country: countryCode
 				});
 			})
 			.catch(err => {
@@ -123,11 +129,16 @@ class App extends React.Component {
 	render(){
 		return (
 			<div className="app">
-				<h1>Simple Weather App</h1>
-				<SearchForm loadWeather={this.getWeather} />
+				<h1 className="app-header">Simple 5-Day Weather Forecast</h1>
+				<div className="form-section">
+					<SearchForm loadWeather={this.getWeather} />
+				</div>
+				<div className="location-header">
+					<span>{this.state.city && this.state.country ? this.state.city + ", " + this.state.country.toUpperCase() : "No city"}</span>
+				</div>
 				<div className="week-container">
 					{this.state.days.map((item, index) => (
-						<DayCard key={index} day={item.day} temperature={item.temperature} />
+						<DayCard key={index} day={item.day.toUpperCase().substring(0, 3)} temperature={item.temperature} weatherIcon={item.weatherIcon} description={item.description}/>
 					))}
 				</div>
 			</div>
