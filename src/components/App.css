@@ -1,6 +1,12 @@
+html {
+	background-color: #c4f5ff;
+}
+
 body {
-	background-image: linear-gradient(to bottom right, #356fe1, #c4f5ff);
+	background-image: linear-gradient(to bottom, #356fe1, #c4f5ff);
 	font-family: Helvetica;
+	margin: 0;
+	padding: 15px;
 }
 
 h1 {
@@ -10,6 +16,7 @@ h1 {
 
 .app-header {
 	background-color: #000d3c96;
+	margin-top: 0;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	border-radius: 30px;
@@ -22,6 +29,7 @@ h1 {
 
 .location-header {
 	margin-top: 15px;
+	margin-bottom: 15px;
 	font-size: 36px;
 	color: #f8f8f8;
 	font-weight: bold;
